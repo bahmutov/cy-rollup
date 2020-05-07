@@ -6,11 +6,20 @@ Implementation copied from [bahmutov/rolling-task](https://github.com/bahmutov/r
 
 ```js
 // cypress/plugins/index.js
+
+const rollupPreprocessor = require('@bahmutov/cy-rollup')
+
 /**
  * @type {Cypress.PluginConfig}
  */
 module.exports = (on, config) => {
-  on('file:preprocessor', require('@bahmutov/cy-rollup'))
+  const options = {
+    // Provide an alternative rollup config file.
+    // The default is rollup.config.js at the project root.
+    configFile: "cypress/rollup-test.config.js"
+  }
+
+  on('file:preprocessor', rollupPreprocessor(options))
 }
 ```
 

@@ -7,77 +7,78 @@ const debug = require('debug')('@bahmutov/cy-rollup')
 // bundled[filename] => promise
 const bundled = {}
 
-/**
- * @type {Cypress.PluginConfig}
- */
-module.exports = async (file) => {
-  debug('cy-rollup for file %s', file.filePath)
+module.exports = (config = {}) => {
+  debug('user config:', config)
 
-  if (bundled[file.filePath]) {
-    debug('already have bundle promise for file %s', file.filePath)
-    return bundled[file.filePath]
-  }
+  return async (file) => {
+    debug('cy-rollup for file %s', file.filePath)
 
-  const rollupFilename = path.resolve(process.cwd(), 'rollup.config.js')
-  debug('reading rollup config %s', rollupFilename)
-  const {options, warnings} = await loadConfigFile(rollupFilename)
-
-  if (warnings.count) {
-    console.log(`We currently have ${warnings.count} warnings`);
-    // This prints all deferred warnings
-    warnings.flush();
-  }
-  debug('rollup options %o', options)
-
-  debug('preprocessor file %o', file)
-
-  // do not deep clone options - it will break plugins
-  const rollupOptions = options[0]
-  rollupOptions.input = file.filePath
-
-  const outputOptions = {
-    format: 'iife',
-    sourcemap: 'inline',
-    file: file.outputPath,
-    name: path.basename(file.filePath)
-  }
-
-  if (file.shouldWatch) {
-    const watchOptions = {
-      ...rollupOptions,
-      output: outputOptions
+    if (bundled[file.filePath]) {
+      debug('already have bundle promise for file %s', file.filePath)
+      return bundled[file.filePath]
     }
 
-    bundled[file.filePath] = new Promise((resolve, reject) => {
-      const watcher = rollup.watch(watchOptions)
+    const rollupFilename = path.resolve(process.cwd(), config.configFile || 'rollup.config.js')
+    debug('reading rollup config %s', rollupFilename)
+    const {options, warnings} = await loadConfigFile(rollupFilename)
 
-      file.on('close', () => {
-        debug('file %s close', file.filePath)
-        watcher.close()
-        delete bundled[file.filePath]
+    if (warnings.count) {
+      console.log(`We currently have ${warnings.count} warnings`);
+      // This prints all deferred warnings
+      warnings.flush();
+    }
+    debug('rollup options %o', options)
+
+    debug('preprocessor file %o', file)
+
+    // do not deep clone options - it will break plugins
+    const rollupOptions = options[0]
+    rollupOptions.input = file.filePath
+
+    const outputOptions = {
+      format: 'iife',
+      sourcemap: 'inline',
+      file: file.outputPath,
+      name: path.basename(file.filePath)
+    }
+
+    if (file.shouldWatch) {
+      const watchOptions = {
+        ...rollupOptions,
+        output: outputOptions
+      }
+
+      bundled[file.filePath] = new Promise((resolve, reject) => {
+        const watcher = rollup.watch(watchOptions)
+
+        file.on('close', () => {
+          debug('file %s close', file.filePath)
+          watcher.close()
+          delete bundled[file.filePath]
+        })
+
+        watcher.on('event', (e) => {
+          debug('rollup watcher %s for file %s', e.code, file.filePath)
+          if (e.code === 'END') {
+            resolve(file.outputPath)
+            file.emit('rerun')
+            return
+          }
+
+          if (e.code === 'ERROR') {
+            console.error(e)
+            reject(e)
+          }
+        })
       })
 
-      watcher.on('event', (e) => {
-        debug('rollup watcher %s for file %s', e.code, file.filePath)
-        if (e.code === 'END') {
-          resolve(file.outputPath)
-          file.emit('rerun')
-          return
-        }
+      await bundled[file.filePath]
+      return file.outputPath
+    }
 
-        if (e.code === 'ERROR') {
-          console.error(e)
-          reject(e)
-        }
-      })
-    })
-
+    const bundle = await rollup.rollup(rollupOptions);
+    bundled[file.filePath] = bundle.write(outputOptions)
     await bundled[file.filePath]
     return file.outputPath
   }
-
-  const bundle = await rollup.rollup(rollupOptions);
-  bundled[file.filePath] = bundle.write(outputOptions)
-  await bundled[file.filePath]
-  return file.outputPath
 }
