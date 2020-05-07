@@ -14,5 +14,13 @@ module.exports = (on, config) => {
 }
 ```
 
+## Debugging
+
+Run with environment variable
+
+```
+DEBUG=@bahmutov/cy-rollup
+```
+
 [ci image]: https://github.com/bahmutov/cy-rollup/workflows/ci/badge.svg?branch=master
 [ci url]: https://github.com/bahmutov/cy-rollup/actions

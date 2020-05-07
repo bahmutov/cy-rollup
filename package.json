@@ -17,12 +17,17 @@
   "peerDependencies": {
     "rollup": "2"
   },
-  "access": "public",
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "src"
   ],
   "repository": {
     "type": "git",
     "url": "https://github.com/bahmutov/cy-rollup.git"
+  },
+  "dependencies": {
+    "debug": "4.1.1"
   }
 }

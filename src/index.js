@@ -2,6 +2,7 @@
 const rollup = require('rollup')
 const loadConfigFile = require('rollup/dist/loadConfigFile')
 const path = require('path')
+const debug = require('debug')('@bahmutov/cy-rollup')
 
 function deepClone(x) {
   return JSON.parse(JSON.stringify(x))
@@ -22,10 +23,10 @@ module.exports = async (file) => {
   // bundled[filename] => promise
   const bundled = {}
 
-  console.log('preprocessor file %o', file)
+  debug('preprocessor file %o', file)
 
   if (bundled[file.filePath]) {
-    console.log('already have bundle promise for file %s', file.filePath)
+    debug('already have bundle promise for file %s', file.filePath)
     return bundled[file.filePath]
   }
 
@@ -46,14 +47,14 @@ module.exports = async (file) => {
     const watcher = rollup.watch(watchOptions)
 
     file.on('close', () => {
-      console.log('file %s close', file.filePath)
+      debug('file %s close', file.filePath)
       watcher.close()
       delete bundled[file.filePath]
     })
 
     bundled[file.filePath] = new Promise((resolve, reject) => {
       watcher.on('event', (e) => {
-        console.log('rollup watcher %s for file %s', e.code, file.filePath)
+        debug('rollup watcher %s for file %s', e.code, file.filePath)
         if (e.code === 'END') {
           resolve(file.outputPath)
           file.emit('rerun')
