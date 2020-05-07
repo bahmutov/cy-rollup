@@ -17,9 +17,7 @@
   "peerDependencies": {
     "rollup": "2"
   },
-  "access": {
-    "scope": "public"
-  },
+  "access": "public",
   "files": [
     "src"
   ],
