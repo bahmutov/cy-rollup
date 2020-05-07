@@ -2,16 +2,23 @@
   "name": "@bahmutov/cy-rollup",
   "version": "1.0.0",
   "description": "Cypress Rollup preprocessor",
-  "main": "index.js",
+  "main": "src",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cypress run"
   },
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "cypress": "4.5.0"
-  },
-  "dependencies": {
+    "cypress": "4.5.0",
     "rollup": "2.8.0"
-  }
+  },
+  "peerDependencies": {
+    "rollup": "2"
+  },
+  "access": {
+    "scope": "public"
+  },
+  "files": [
+    "src"
+  ]
 }
