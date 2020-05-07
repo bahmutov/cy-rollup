@@ -1,8 +1,9 @@
 /// <reference types="cypress" />
-
+const rollupPreprocessor = require('../..')
 /**
  * @type {Cypress.PluginConfig}
  */
 module.exports = (on, config) => {
-  on('file:preprocessor', require('../..'))
+  // use default options
+  on('file:preprocessor', rollupPreprocessor())
 }
