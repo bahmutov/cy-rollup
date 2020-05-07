@@ -13,6 +13,7 @@ function deepClone(x) {
  */
 module.exports = async (file) => {
   const rollupFilename = path.resolve(process.cwd(), 'rollup.config.js')
+  debug('reading rollup config %s', rollupFilename)
   const {options, warnings} = await loadConfigFile(rollupFilename)
 
   if (warnings.count) {
@@ -20,6 +21,8 @@ module.exports = async (file) => {
     // This prints all deferred warnings
     warnings.flush();
   }
+  debug('rollup options %o', options)
+
   // bundled[filename] => promise
   const bundled = {}
 
