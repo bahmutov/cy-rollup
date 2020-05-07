@@ -4,10 +4,6 @@ const loadConfigFile = require('rollup/dist/loadConfigFile')
 const path = require('path')
 const debug = require('debug')('@bahmutov/cy-rollup')
 
-function deepClone(x) {
-  return JSON.parse(JSON.stringify(x))
-}
-
 /**
  * @type {Cypress.PluginConfig}
  */
@@ -33,13 +29,15 @@ module.exports = async (file) => {
     return bundled[file.filePath]
   }
 
-  const rollupOptions = deepClone(options[0])
+  // do not deep clone options - it will break plugins
+  const rollupOptions = options[0]
   rollupOptions.input = file.filePath
 
   const outputOptions = {
     format: 'iife',
     sourcemap: 'inline',
-    file: file.outputPath
+    file: file.outputPath,
+    name: path.basename(file.filePath)
   }
 
   if (file.shouldWatch) {
@@ -47,15 +45,16 @@ module.exports = async (file) => {
       ...rollupOptions,
       output: outputOptions
     }
-    const watcher = rollup.watch(watchOptions)
-
-    file.on('close', () => {
-      debug('file %s close', file.filePath)
-      watcher.close()
-      delete bundled[file.filePath]
-    })
 
     bundled[file.filePath] = new Promise((resolve, reject) => {
+      const watcher = rollup.watch(watchOptions)
+
+      file.on('close', () => {
+        debug('file %s close', file.filePath)
+        watcher.close()
+        delete bundled[file.filePath]
+      })
+
       watcher.on('event', (e) => {
         debug('rollup watcher %s for file %s', e.code, file.filePath)
         if (e.code === 'END') {
