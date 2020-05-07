@@ -4,10 +4,20 @@ const loadConfigFile = require('rollup/dist/loadConfigFile')
 const path = require('path')
 const debug = require('debug')('@bahmutov/cy-rollup')
 
+// bundled[filename] => promise
+const bundled = {}
+
 /**
  * @type {Cypress.PluginConfig}
  */
 module.exports = async (file) => {
+  debug('cy-rollup for file %s', file.filePath)
+
+  if (bundled[file.filePath]) {
+    debug('already have bundle promise for file %s', file.filePath)
+    return bundled[file.filePath]
+  }
+
   const rollupFilename = path.resolve(process.cwd(), 'rollup.config.js')
   debug('reading rollup config %s', rollupFilename)
   const {options, warnings} = await loadConfigFile(rollupFilename)
@@ -19,15 +29,7 @@ module.exports = async (file) => {
   }
   debug('rollup options %o', options)
 
-  // bundled[filename] => promise
-  const bundled = {}
-
   debug('preprocessor file %o', file)
-
-  if (bundled[file.filePath]) {
-    debug('already have bundle promise for file %s', file.filePath)
-    return bundled[file.filePath]
-  }
 
   // do not deep clone options - it will break plugins
   const rollupOptions = options[0]
