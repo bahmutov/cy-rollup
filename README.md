@@ -1,6 +1,6 @@
-# @bahmutov/cy-rollup [![ci status][ci image]][ci url]
+# @bahmutov/cy-rollup [![ci status][ci image]][ci url] [![badges status][badges image]][badges url] ![cypress version](https://img.shields.io/badge/cypress-4.5.0-brightgreen) ![rollup version](https://img.shields.io/badge/rollup-2.8.0-brightgreen)
 
-Implementation copied from [bahmutov/rolling-task](https://github.com/bahmutov/rolling-task)
+Implementation copied from [bahmutov/rolling-task](https://github.com/bahmutov/rolling-task), used by [cypress-svelte-unit-test](https://github.com/bahmutov/cypress-svelte-unit-test)
 
 ## Use
 
@@ -33,3 +33,5 @@ DEBUG=@bahmutov/cy-rollup
 
 [ci image]: https://github.com/bahmutov/cy-rollup/workflows/ci/badge.svg?branch=master
 [ci url]: https://github.com/bahmutov/cy-rollup/actions
+[badges image]: https://github.com/bahmutov/cy-rollup/workflows/badges/badge.svg?branch=master
+[badges url]: https://github.com/bahmutov/cy-rollup/actions

@@ -11,6 +11,7 @@
   "license": "MIT",
   "devDependencies": {
     "cypress": "4.5.0",
+    "dependency-version-badge": "1.2.0",
     "rollup": "2.8.0",
     "semantic-release": "^17.0.7"
   },
