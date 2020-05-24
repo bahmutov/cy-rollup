@@ -2,6 +2,12 @@
 
 Implementation copied from [bahmutov/rolling-task](https://github.com/bahmutov/rolling-task), used by [cypress-svelte-unit-test](https://github.com/bahmutov/cypress-svelte-unit-test)
 
+## Install
+
+```
+npm install @bahmutov/cy-rollup --save-dev
+```
+
 ## Use
 
 ```js
