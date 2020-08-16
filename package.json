@@ -12,7 +12,7 @@
   "devDependencies": {
     "cypress": "4.12.1",
     "dependency-version-badge": "1.2.0",
-    "rollup": "2.26.2",
+    "rollup": "2.26.3",
     "semantic-release": "^17.0.7"
   },
   "peerDependencies": {
