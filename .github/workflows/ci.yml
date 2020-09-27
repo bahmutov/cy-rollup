@@ -17,11 +17,10 @@ jobs:
       # verify the source code was instrumented
       # and the code coverage report generated
       - name: Check code coverage ✅
+        working-directory: examples/code-coverage
         run: |
           npm run check:coverage
           npm run check:covered
-        with:
-          working-directory: examples/code-coverage
 
       - name: Semantic Release 🚀
         uses: cycjimmy/semantic-release-action@v2
