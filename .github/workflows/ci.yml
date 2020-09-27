@@ -10,6 +10,11 @@ jobs:
       - name: Run Cypress 🧪
         uses: cypress-io/github-action@v2
 
+      - name: Example with code coverage 💎
+        uses: cypress-io/github-action@v2
+        with:
+          working-directory: examples/code-coverage
+
       - name: Semantic Release 🚀
         uses: cycjimmy/semantic-release-action@v2
         env:
