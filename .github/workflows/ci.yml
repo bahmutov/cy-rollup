@@ -10,6 +10,18 @@ jobs:
       - name: Run Cypress 🧪
         uses: cypress-io/github-action@v2
 
+      - name: Example with code coverage 💎
+        uses: cypress-io/github-action@v2
+        with:
+          working-directory: examples/code-coverage
+      # verify the source code was instrumented
+      # and the code coverage report generated
+      - name: Check code coverage ✅
+        working-directory: examples/code-coverage
+        run: |
+          npm run check:coverage
+          npm run check:covered
+
       - name: Semantic Release 🚀
         uses: cycjimmy/semantic-release-action@v2
         env:

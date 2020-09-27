@@ -22,12 +22,16 @@ module.exports = (on, config) => {
   const options = {
     // Provide an alternative rollup config file.
     // The default is rollup.config.js at the project root.
-    configFile: "cypress/rollup-test.config.js"
+    configFile: 'cypress/rollup-test.config.js',
   }
 
   on('file:preprocessor', rollupPreprocessor(options))
 }
 ```
+
+## Code coverage
+
+You can instrument the application's code and generate coverage reports using [@cypress/code-coverage](https://github.com/cypress-io/code-coverage) plugin. See the full example in the [examples/code-coverage](examples/code-coverage) folder.
 
 ## Debugging
 
@@ -41,9 +45,9 @@ DEBUG=@bahmutov/cy-rollup
 
 Author: Gleb Bahmutov &lt;gleb.bahmutov@gmail.com&gt; &copy; 2020
 
-* [@bahmutov](https://twitter.com/bahmutov)
-* [glebbahmutov.com](https://glebbahmutov.com)
-* [blog](https://glebbahmutov.com/blog)
+- [@bahmutov](https://twitter.com/bahmutov)
+- [glebbahmutov.com](https://glebbahmutov.com)
+- [blog](https://glebbahmutov.com/blog)
 
 License: MIT - do anything with the code, but don't blame me if it does not work.
 

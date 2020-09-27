@@ -1,0 +1,22 @@
+{
+  "name": "code-coverage",
+  "version": "1.0.0",
+  "description": "Example showing code coverage from Cypress tests",
+  "private": true,
+  "scripts": {
+    "test": "cypress run",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "check:coverage": "check-coverage src/calc.js",
+    "check:covered": "only-covered src/calc.js"
+  },
+  "devDependencies": {
+    "@bahmutov/cy-rollup": "file:../..",
+    "@cypress/code-coverage": "3.8.1",
+    "@rollup/plugin-commonjs": "15.1.0",
+    "@rollup/plugin-node-resolve": "9.0.0",
+    "check-code-coverage": "1.10.0",
+    "cypress": "5.2.0",
+    "rollup-plugin-istanbul": "2.0.1"
+  }
+}
