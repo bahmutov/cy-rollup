@@ -11,6 +11,8 @@
   "devDependencies": {
     "@bahmutov/cy-rollup": "file:../..",
     "@cypress/code-coverage": "3.8.1",
+    "@rollup/plugin-commonjs": "15.1.0",
+    "@rollup/plugin-node-resolve": "9.0.0",
     "cypress": "5.2.0",
     "rollup-plugin-istanbul": "2.0.1"
   }
