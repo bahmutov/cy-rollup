@@ -1,0 +1,14 @@
+{
+  "name": "code-coverage",
+  "version": "1.0.0",
+  "description": "Example showing code coverage from Cypress tests",
+  "private": true,
+  "scripts": {
+    "test": "cypress run"
+  },
+  "devDependencies": {
+    "@bahmutov/cy-rollup": "file:../..",
+    "@cypress/code-coverage": "3.8.1",
+    "cypress": "5.2.0"
+  }
+}
