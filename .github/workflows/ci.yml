@@ -10,9 +10,16 @@ jobs:
       - name: Run Cypress 🧪
         uses: cypress-io/github-action@v2
 
-      # TODO: check that the source file was completely covered by tests
       - name: Example with code coverage 💎
         uses: cypress-io/github-action@v2
+        with:
+          working-directory: examples/code-coverage
+      # verify the source code was instrumented
+      # and the code coverage report generated
+      - name: Check code coverage ✅
+        run: |
+          npm run check:coverage
+          npm run check:covered
         with:
           working-directory: examples/code-coverage
 
