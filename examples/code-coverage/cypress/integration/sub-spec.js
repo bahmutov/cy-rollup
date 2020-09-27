@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-import { sub } from './calc'
+import { add } from '../../src/calc'
 
 describe('examples', () => {
   context('code coverage', () => {

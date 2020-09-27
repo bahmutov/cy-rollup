@@ -4,7 +4,9 @@
   "description": "Example showing code coverage from Cypress tests",
   "private": true,
   "scripts": {
-    "test": "cypress run"
+    "test": "cypress run",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
   },
   "devDependencies": {
     "@bahmutov/cy-rollup": "file:../..",
