@@ -1,4 +1,4 @@
-# @bahmutov/cy-rollup [![ci status][ci image]][ci url] [![badges status][badges image]][badges url] [![renovate-app badge][renovate-badge]][renovate-app] ![cypress version](https://img.shields.io/badge/cypress-6.2.1-brightgreen) ![rollup version](https://img.shields.io/badge/rollup-2.36.1-brightgreen)
+# @bahmutov/cy-rollup [![ci status][ci image]][ci url] [![badges status][badges image]][badges url] [![renovate-app badge][renovate-badge]][renovate-app] ![cypress version](https://img.shields.io/badge/cypress-6.2.1-brightgreen) ![rollup version](https://img.shields.io/badge/rollup-2.36.2-brightgreen)
 
 Implementation copied from [bahmutov/rolling-task](https://github.com/bahmutov/rolling-task), used by [cypress-svelte-unit-test](https://github.com/bahmutov/cypress-svelte-unit-test)
 
