@@ -13,7 +13,7 @@
     "cypress": "6.3.0",
     "dependency-version-badge": "1.2.0",
     "prettier": "2.1.2",
-    "rollup": "2.37.1",
+    "rollup": "2.38.0",
     "semantic-release": "^17.0.7"
   },
   "peerDependencies": {
