@@ -10,7 +10,7 @@ const bundled = {}
 module.exports = (config = {}) => {
   debug('user config:', config)
 
-  return async (file) => {
+  return (file) => {
     debug('cy-rollup for file %s', file.filePath)
 
     if (bundled[file.filePath]) {
