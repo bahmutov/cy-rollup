@@ -13,11 +13,11 @@
     "cypress": "8.7.0",
     "dependency-version-badge": "1.2.0",
     "prettier": "2.1.2",
-    "rollup": "2.79.1",
+    "rollup": "3.29.4",
     "semantic-release": "^17.0.7"
   },
   "peerDependencies": {
-    "rollup": "2"
+    "rollup": "2 || 3"
   },
   "publishConfig": {
     "access": "public"
